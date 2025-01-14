@@ -16,8 +16,8 @@ This repository represents the official implementation of the paper titled "Dept
         <a href="https://orcid.org/0009-0007-1175-5918">Hao Zhang</a>,
         <a href="https://ruijiezhu94.github.io/ruijiezhu/">Ruijie Zhu</a>,
         <a href="https://orcid.org/0009-0004-3280-8490">Li Liu</a>,
-        <a href="http://staff.ustc.edu.cn/~tzzhang/">Tianzhu Zhang†</a>,
         <a href="https://pengtaojiang.github.io/">Peng-Tao Jiang†</a>,
+        <a href="http://staff.ustc.edu.cn/~tzzhang/">Tianzhu Zhang†</a>,
         <br>
         *Equal Contribution, †Corresponding Author
         <br>
@@ -35,9 +35,10 @@ This repository represents the official implementation of the paper titled "Dept
 [Peng-Tao Jiang](https://pengtaojiang.github.io/) -->
 
 <div align="center">
- <!-- <a href='https://arxiv.org/abs/2310.08044'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+ <a href='https://arxiv.org/abs/2501.02576'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <!-- <a href='https://arxiv.org/abs/[]'><img src='https://img.shields.io/badge/arXiv-[]-b31b1b.svg'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
- <!-- <a href='https://ruijiezhu94.github.io/ECDepth_page/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+ <a href='https://indu1ge.github.io/DepthMaster_page/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <a href='https://huggingface.co/zysong212/DepthMaster'><img src='https://img.shields.io/badge/🤗%20Hugging%20Face%20-Space-yellow'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <a href='https://www.apache.org/licenses/LICENSE-2.0'><img src='https://img.shields.io/badge/License-Apache--2.0-929292'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <!-- <a href='https://paperswithcode.com/sota/unsupervised-monocular-depth-estimation-on-7?p=ec-depth-exploring-the-consistency-of-self'><img src='https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/ec-depth-exploring-the-consistency-of-self/unsupervised-monocular-depth-estimation-on-7'></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 </div>
@@ -52,8 +53,8 @@ This repository represents the official implementation of the paper titled "Dept
 >We present DepthMaster, a tamed single-step diffusion model that customizes generative features in diffusion models to suit the discriminative depth estimation task. We introduce a Feature Alignment module to mitigate overfitting to texture and a Fourier Enhancement module to refine fine-grained details. DepthMaster exhibits state-of-the-art zero-shot performance and superior detail preservation ability, surpassing
 other diffusion-based methods across various datasets.
 ## 📢 News
-<!-- 2024-05-28: Training code is released.<br>
-2024-03-04: Accepted to CVPR 2024. <br> -->
+2025-01-15: Evaluation code is released. <br>
+2025-01-02: [Paper](https://arxiv.org/abs/2501.02576) is released on arXiv. <br>
 <!-- 2023-12-04: Added <a href="https://arxiv.org/abs/2312.02145"><img src="https://img.shields.io/badge/arXiv-PDF-b31b1b" height="16"></a>
 paper and inference code (this repository). -->
 
@@ -61,20 +62,20 @@ paper and inference code (this repository). -->
 Please refer to [installation.md](./docs/installation.md) for installation.
 
 ## Checkpoint
-The model can be downloaded here.
+The model can be downloaded [here](https://huggingface.co/zysong212/DepthMaster).
 
 ## 🏃 Testing on your images
 
 ### 📷 Prepare images
 
-Place your images in a directory, for example, under `input/in-the-wild_example`, and run the following inference command.
+Place your images in a directory, for example, under `in_the_wild_example/input`, and run the following inference command.
 
 ```bash
 bash scripts/infer.sh
  ```
 
 
-You can find all results in `output/in-the-wild_example`. Enjoy!
+You can find all results in `in_the_wild_example/output`. Enjoy!
 
 
 <!-- ### ⬇ Checkpoint cache
@@ -107,21 +108,22 @@ python run.py \
 
 ## 🦿 Evaluation on test datasets <a name="evaluation"></a>
 
-Set data directory variable (also needed in evaluation scripts) and download [evaluation datasets](https://share.phys.ethz.ch/~pf/bingkedata/marigold/evaluation_dataset) follow Marigold into corresponding subfolders:
+Set data directory variable (also needed in evaluation scripts) and download [evaluation datasets](https://share.phys.ethz.ch/~pf/bingkedata/marigold/evaluation_dataset) follow [Marigold](https://github.com/prs-eth/Marigold) into corresponding subfolders:
 
 ```bash
 export BASE_DATA_DIR=<YOUR_DATA_DIR>  # Set target data directory
 
 wget -r -np -nH --cut-dirs=4 -R "index.html*" -P ${BASE_DATA_DIR} https://share.phys.ethz.ch/~pf/bingkedata/marigold/evaluation_dataset/
 ```
-
+Download the model [here](https://huggingface.co/zysong212/DepthMaster) to `ckpt/eval` subfolder.
 Run evaluation scripts, for example:
 
 ```bash
-bash scripts/eval/eval_kitti.sh
+bash scripts/eval_kitti.sh
 ```
+The evaluation results will be saved to `output\kitti`.
 
-## 🏋️ Training
+<!-- ## 🏋️ Training
 
 
 Set environment parameters for the data directory:
@@ -144,21 +146,21 @@ bash scripts/train.sh
 
 Evaluating results
 
-Only the U-Net is updated and saved during training. To use the inference pipeline with your training result, replace `unet` folder in Marigold checkpoints with that in the `checkpoint` output folder. Then refer to [this section](#evaluation) for evaluation.
+Only the U-Net is updated and saved during training. To use the inference pipeline with your training result, replace `unet` folder in Marigold checkpoints with that in the `checkpoint` output folder. Then refer to [this section](#evaluation) for evaluation. -->
 
 
 ## 🎓 Citation
 
 Please cite our paper:
 
-<!-- ```bibtex
-@InProceedings{ke2023repurposing,
-      title={Repurposing Diffusion-Based Image Generators for Monocular Depth Estimation},
-      author={Bingxin Ke and Anton Obukhov and Shengyu Huang and Nando Metzger and Rodrigo Caye Daudt and Konrad Schindler},
-      booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-      year={2024}
+```bibtex
+@article{song2025depthmaster,
+  title={DepthMaster: Taming Diffusion Models for Monocular Depth Estimation},
+  author={Song, Ziyang and Wang, Zerong and Li, Bo and Zhang, Hao and Zhu, Ruijie and Liu, Li and Jiang, Peng-Tao and Zhang, Tianzhu},
+  journal={arXiv preprint arXiv:2501.02576},
+  year={2025}
 }
-``` -->
+```
 
 ## Acknowledgements
 

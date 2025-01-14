@@ -1,3 +1,27 @@
+# Last modified: 2025-01-14
+#
+# Copyright 2025 Ziyang Song, USTC. All rights reserved.
+#
+# This file has been modified from the original version.
+# Original copyright (c) 2023 Bingxin Ke, ETH Zurich. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# --------------------------------------------------------------------------
+# If you find this code useful, we kindly ask you to cite our paper in your work.
+# Please find bibtex at: https://github.com/indu1ge/DepthMaster#-citation
+# More information about the method can be found at https://indu1ge.github.io/DepthMaster_page
+# --------------------------------------------------------------------------
+
 import argparse
 import logging
 import os
@@ -11,6 +35,7 @@ from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
 from depthmaster import DepthMasterPipeline
+from depthmaster.modules.unet_2d_condition import UNet2DConditionModel
 from src.util.seeding import seed_all
 from src.dataset import (
     BaseDepthDataset,
@@ -76,12 +101,6 @@ if __name__=="__main__":
 
     # inference setting
     parser.add_argument(
-        "--denoise_steps",
-        type=int,
-        default=1, # quantitative evaluation uses 50 steps
-        help="Diffusion denoising steps, more steps results in higher accuracy but slower inference speed.",
-    )
-    parser.add_argument(
         "--ensemble_size",
         type=int,
         default=1,
@@ -119,7 +138,7 @@ if __name__=="__main__":
     # LS depth alignment
     parser.add_argument(
         "--alignment",
-        choices=[None, "least_square", "least_square_disparity", "least_square_log", "least_square_sqrt_disp"],
+        choices=[None, "least_square", "least_square_disparity", "least_square_sqrt_disp"],
         default=None,
         help="Method to estimate scale and shift between predictions and ground truth.",
     )
@@ -141,7 +160,6 @@ if __name__=="__main__":
     base_data_dir = args.base_data_dir
     output_dir = args.output_dir
 
-    denoise_steps = args.denoise_steps
     ensemble_size = args.ensemble_size
 
     alignment = args.alignment
@@ -167,7 +185,7 @@ if __name__=="__main__":
     # Print out config
     logging.info(
         f"Inference settings: checkpoint = `{checkpoint_path}`, "
-        f"with denoise_steps = {denoise_steps}, ensemble_size = {ensemble_size}, "
+        f"with ensemble_size = {ensemble_size}, "
         f"processing resolution = {processing_res}, seed = {seed}; "
         f"dataset config = `{dataset_config}`."
     )
@@ -238,6 +256,8 @@ if __name__=="__main__":
     pipe = DepthMasterPipeline.from_pretrained(
         checkpoint_path, variant=variant, torch_dtype=dtype
     )
+    unet = UNet2DConditionModel.from_pretrained(os.path.join(checkpoint_path, f'unet'))
+    pipe.unet = unet
 
     try:
         pipe.enable_xformers_memory_efficient_attention()
@@ -270,7 +290,6 @@ if __name__=="__main__":
             # Predict depth
             pipe_out = pipe(
                 input_image,
-                denoising_steps=denoise_steps,
                 processing_res=processing_res,
                 match_input_res=match_input_res,
                 batch_size=0,

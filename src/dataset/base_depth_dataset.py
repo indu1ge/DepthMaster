@@ -1,6 +1,9 @@
-# Last modified: 2024-04-30
+# Last modified: 2025-01-14
 #
-# Copyright 2023 Bingxin Ke, ETH Zurich. All rights reserved.
+# Copyright 2025 Ziyang Song, USTC. All rights reserved.
+#
+# This file has been modified from the original version.
+# Original copyright (c) 2023 Bingxin Ke, ETH Zurich. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +18,8 @@
 # limitations under the License.
 # --------------------------------------------------------------------------
 # If you find this code useful, we kindly ask you to cite our paper in your work.
-# Please find bibtex at: https://github.com/prs-eth/Marigold#-citation
-# If you use or adapt this code, please attribute to https://github.com/prs-eth/marigold.
-# More information about the method can be found at https://marigoldmonodepth.github.io
+# Please find bibtex at: https://github.com/indu1ge/DepthMaster#-citation
+# More information about the method can be found at https://indu1ge.github.io/DepthMaster_page
 # --------------------------------------------------------------------------
 
 import io
@@ -64,13 +66,11 @@ class BaseDepthDataset(Dataset):
         mode: DatasetMode,
         filename_ls_path: str,
         dataset_dir: str,
-        dataset_tom_dir: str,
         disp_name: str,
         min_depth: float,
         max_depth: float,
         has_filled_depth: bool,
         has_egde_mask: bool,
-        has_tom: bool,
         name_mode: DepthFileNameMode,
         depth_transform: Union[DepthNormalizerBase, None] = None,
         augmentation_args: dict = None,
@@ -84,14 +84,12 @@ class BaseDepthDataset(Dataset):
         # dataset info
         self.filename_ls_path = filename_ls_path
         self.dataset_dir = dataset_dir
-        self.dataset_tom_dir = dataset_tom_dir
         assert os.path.exists(
             self.dataset_dir
         ), f"Dataset does not exist at: {self.dataset_dir}"
         self.disp_name = disp_name
         self.has_filled_depth = has_filled_depth
         self.has_egde_mask = has_egde_mask
-        self.has_tom = has_tom
         self.name_mode: DepthFileNameMode = name_mode
         self.min_depth = min_depth
         self.max_depth = max_depth
@@ -152,15 +150,15 @@ class BaseDepthDataset(Dataset):
                 rasters["depth_filled_linear"]
             ).clone()
 
-            # depth2disp
-            rasters["depth_raw_linear"] = depth2disparity(rasters["depth_raw_linear"]).clone()
-            if self.has_filled_depth:
-                rasters["depth_filled_linear"] = depth2disparity(rasters["depth_filled_linear"]).clone()
+            # # depth2disp
+            # rasters["depth_raw_linear"] = depth2disparity(rasters["depth_raw_linear"]).clone()
+            # if self.has_filled_depth:
+            #     rasters["depth_filled_linear"] = depth2disparity(rasters["depth_filled_linear"]).clone()
 
-            # sqrt(x)
-            rasters["depth_raw_linear"] = torch.sqrt(rasters["depth_raw_linear"]).clone()
-            if self.has_filled_depth:
-                rasters["depth_filled_linear"] = torch.sqrt(rasters["depth_filled_linear"]).clone()
+            # # sqrt(x)
+            # rasters["depth_raw_linear"] = torch.sqrt(rasters["depth_raw_linear"]).clone()
+            # if self.has_filled_depth:
+            #     rasters["depth_filled_linear"] = torch.sqrt(rasters["depth_filled_linear"]).clone()
 
         other = {"index": index, "rgb_relative_path": rgb_rel_path}
 

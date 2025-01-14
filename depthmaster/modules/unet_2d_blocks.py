@@ -42,11 +42,7 @@ logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 class BlockFE(nn.Module):
     def __init__(self, dim=1280, groups = 8):
         super().__init__()
-        # # self.proj = WeightStandardizedConv2d(dim, dim_out, 3, padding = 1)
-        # self.complex_weight = nn.Parameter(torch.randn(dim, 2, h, w//2+1, dtype=torch.float32) * 0.02)
-        # # self.complex_weight = nn.Parameter(torch.normal(mean=0, std=0.01, size=(dim, h, w // 2 + 1, 2), dtype=torch.float32))
         self.norm = nn.GroupNorm(groups, dim)
-        # self.act = nn.SiLU()
         self.conv_f1 = nn.Conv2d(dim, dim, kernel_size=3, padding=1)
         self.act_f1 = nn.SiLU()
         self.conv_f2 = nn.Conv2d(dim, dim, kernel_size=3, padding=1)

@@ -1,5 +1,9 @@
-# Copyright 2023 Bingxin Ke, ETH Zurich. All rights reserved.
-# Last modified: 2024-05-24
+# Last modified: 2025-01-14
+#
+# Copyright 2025 Ziyang Song, USTC. All rights reserved.
+#
+# This file has been modified from the original version.
+# Original copyright (c) 2023 Bingxin Ke, ETH Zurich. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +18,8 @@
 # limitations under the License.
 # --------------------------------------------------------------------------
 # If you find this code useful, we kindly ask you to cite our paper in your work.
-# Please find bibtex at: https://github.com/prs-eth/Marigold#-citation
-# More information about the method can be found at https://marigoldmonodepth.github.io
+# Please find bibtex at: https://github.com/indu1ge/DepthMaster#-citation
+# More information about the method can be found at https://indu1ge.github.io/DepthMaster_page
 # --------------------------------------------------------------------------
 
 
@@ -118,7 +122,7 @@ class DepthMasterPipeline(DiffusionPipeline):
     ):
         super().__init__()
 
-        unet = UNet2DConditionModel.from_pretrained('ckpt/eval')
+        # unet = UNet2DConditionModel.from_pretrained('/zssd/szy/Marigold_rgb2d/ckpt/eval/unet')
 
         self.register_modules(
             unet=unet,
@@ -327,28 +331,12 @@ class DepthMasterPipeline(DiffusionPipeline):
         ).to(device)  # [B, 2, 1024]
 
 
-        # for i, t in iterable:
-        # for i in tqdm(range(num_inference_steps), desc='processing'):
-        # for i in range(3, -1, -1):
-        #     # unet_input = torch.cat(
-        #     #     [rgb_latent, depth_latent], dim=1
-        #     # )  # this order is important: [1,8,H,W]
-
-
         unet_output = self.unet(
                 rgb_latent,
                 1,
                 encoder_hidden_states=batch_empty_text_embed,
             ).sample  # [B, 4, h, w]
 
-        # for i in range(3, -1, -1):
-        #     rgb_latent = self.unet(
-        #             rgb_latent,
-        #             i+1,
-        #             encoder_hidden_states=batch_empty_text_embed,
-        #             # class_labels=class_embedding
-        #         ).sample  # [B, 4, h, w]
-        # unet_output = rgb_latent
         torch.cuda.empty_cache()
         depth = self.decode_depth(unet_output) # [B, 1, h, w]
 

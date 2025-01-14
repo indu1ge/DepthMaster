@@ -1,0 +1,1 @@
+Scene01/clone/frames/rgb/Camera_1/rgb_00114.jpg Scene01/clone/frames/depth/Camera_1/depth_00114.png

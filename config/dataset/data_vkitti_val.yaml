@@ -1,7 +1,6 @@
 name: vkitti
 disp_name: vkitti_val
-dir: VirtualKITTI
-tom_dir: none
-filenames: data_split/vkitti/vkitti_val_vae_100.txt
+dir: vkitti/vkitti.tar
+filenames: data_split/vkitti/vkitti_val.txt
 kitti_bm_crop: true
 valid_mask_crop: eigen

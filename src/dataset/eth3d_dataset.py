@@ -1,6 +1,9 @@
-# Last modified: 2024-02-08
+# Last modified: 2025-01-14
 #
-# Copyright 2023 Bingxin Ke, ETH Zurich. All rights reserved.
+# Copyright 2025 Ziyang Song, USTC. All rights reserved.
+#
+# This file has been modified from the original version.
+# Original copyright (c) 2023 Bingxin Ke, ETH Zurich. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +18,8 @@
 # limitations under the License.
 # --------------------------------------------------------------------------
 # If you find this code useful, we kindly ask you to cite our paper in your work.
-# Please find bibtex at: https://github.com/prs-eth/Marigold#-citation
-# If you use or adapt this code, please attribute to https://github.com/prs-eth/marigold.
-# More information about the method can be found at https://marigoldmonodepth.github.io
+# Please find bibtex at: https://github.com/indu1ge/DepthMaster#-citation
+# More information about the method can be found at https://indu1ge.github.io/DepthMaster_page
 # --------------------------------------------------------------------------
 
 import torch
@@ -41,7 +43,6 @@ class ETH3DDataset(BaseDepthDataset):
             max_depth=torch.inf,
             has_filled_depth=False,
             has_egde_mask=False,
-            has_tom=False,
             name_mode=DepthFileNameMode.id,
             **kwargs,
         )

@@ -49,7 +49,6 @@ from depthmaster.modules.unet_2d_blocks import (
     get_down_block,
     get_mid_block,
     get_up_block,
-    BlockFFT,
     BlockFE,
 )
 
@@ -409,22 +408,7 @@ class UNet2DConditionModel(
             dropout=dropout,
         )
 
-        # self.fftblock = BlockFFT()
-        # self.fftblock = BlockFE()
-        # fftblocks = []
-        # fftblocks.append(BlockFE(dim=1280, groups=32))
-        # fftblocks.append(BlockFE(dim=1280, groups=32))
-        # fftblocks.append(BlockFE(dim=1280, groups=32))
-        # fftblocks.append(BlockFE(dim=640, groups=32))
-        # fftblocks.append(BlockFE(dim=320, groups=32))
-        # self.fftblocks = nn.ModuleList(fftblocks)
-        # fftblocks = []
-        # fftblocks.append(BlockFFT(dim=1280, h=10, w=10, groups=32))
-        # fftblocks.append(BlockFFT(dim=1280, h=20, w=20, groups=32))
-        # fftblocks.append(BlockFFT(dim=1280, h=40, w=40, groups=32))
-        # fftblocks.append(BlockFFT(dim=640, h=80, w=80, groups=32))
-        # fftblocks.append(BlockFFT(dim=320, h=80, w=80, groups=32))
-        # self.fftblocks = nn.ModuleList(fftblocks)
+        self.fftblock = BlockFE()
 
         # count how many layers upsample the images
         self.num_upsamplers = 0
@@ -1261,8 +1245,6 @@ class UNet2DConditionModel(
 
             down_block_res_samples = new_down_block_res_samples
 
-        # feat_64 = down_block_res_samples[8]
-
         # 4. mid
         if self.mid_block is not None:
             if hasattr(self.mid_block, "has_cross_attention") and self.mid_block.has_cross_attention:
@@ -1290,9 +1272,8 @@ class UNet2DConditionModel(
 
         feat_64 = sample
 
-        # fft transform
-        # sample = self.fftblock(sample)
-        # sample = self.fftblocks[0](sample)
+        # fe transform
+        sample = self.fftblock(sample)
 
         # 5. up
         for i, upsample_block in enumerate(self.up_blocks):
@@ -1324,7 +1305,6 @@ class UNet2DConditionModel(
                     res_hidden_states_tuple=res_samples,
                     upsample_size=upsample_size,
                 )
-            # sample = self.fftblocks[i+1](sample)
 
         # 6. post-process
         if self.conv_norm_out:

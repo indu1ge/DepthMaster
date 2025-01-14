@@ -59,22 +59,6 @@ loss:
   kwargs:
     reduction: mean
 
-# loss:
-#   name: l1_loss
-#   kwargs:
-#     reduction: mean
-# loss:
-#   name: huber_loss
-#   kwargs:
-#     # reduction: mean
-#     delta: 3
-
-# loss:
-#   name: silog_rmse
-#   kwargs:
-#     lamb: 0.5
-#     log_pred: false
-
 diff_loss:
   name: mse_loss
   kwargs:
@@ -95,7 +79,6 @@ lr_scheduler:
 
 # Validation (and visualization) settings
 validation:
-  denoising_steps: 1
   ensemble_size: 1  # simplified setting for on-training validation
   processing_res: 0
   match_input_res: false
@@ -120,10 +103,8 @@ eval:
   - silog_rmse
 
 grad_loss:
-  # name: l1_loss
   name: huber_loss
   kwargs:
-    # reduction: mean
     delta: 0.2
   lamda: 1e-3
   num: 3
