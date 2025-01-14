@@ -1,0 +1,4 @@
+model:
+  name: DepthMaster_pipeline
+  pretrained_path: initialization_v2
+  latent_scale_factor: 0.18215

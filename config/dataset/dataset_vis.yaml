@@ -1,0 +1,10 @@
+dataset:
+  vis:
+  - name: hypersim
+    disp_name: hypersim_vis
+    dir: Hypersim/preprocessed/val
+    tom_dir: Hypersim/tom_mask_groundedSAM/val
+    filenames: data_split/hypersim/selected_vis_sample.txt
+    resize_to_hw:
+    - 480
+    - 640

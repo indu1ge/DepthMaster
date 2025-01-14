@@ -1,0 +1,6 @@
+name: nyu_v2
+disp_name: nyu_test_full
+dir: marigold_eval/nyuv2
+tom_dir: none
+filenames: data_split/nyu/labeled/filename_list_test.txt
+eigen_valid_mask: true

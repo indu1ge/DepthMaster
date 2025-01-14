@@ -1,0 +1,5 @@
+name: hypersim
+disp_name: hypersim_test
+dir: Hypersim/preprocessed/val
+filenames: data_split/hypersim/filename_list_val_filtered_small_80.txt
+tom_dir: none

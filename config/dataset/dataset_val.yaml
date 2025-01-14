@@ -1,0 +1,27 @@
+dataset:
+  val:
+  # Smaller subsets for faster validation during training
+  # The first dataset is used to calculate main eval metric.
+  - name: hypersim
+    disp_name: hypersim_val_small_80
+    dir: Hypersim/preprocessed/val
+    tom_dir: Hypersim/tom_mask_groundedSAM/val
+    filenames: data_split/hypersim/filename_list_val_filtered_small_80.txt
+    resize_to_hw:
+    - 480
+    - 640
+
+  - name: nyu_v2
+    disp_name: nyu_train_small_100
+    dir: marigold_eval/nyuv2
+    tom_dir: marigold_eval/nyuv2/tom_mask_groundedSAM
+    filenames: data_split/nyu/labeled/filename_list_train_small_100.txt
+    eigen_valid_mask: true
+
+  - name: kitti
+    disp_name: kitti_val_from_train_sub_100
+    dir: marigold_eval/kitti/val_marigold
+    tom_dir: none
+    filenames: data_split/kitti/eigen_val_from_train_sub_100.txt
+    kitti_bm_crop: true
+    valid_mask_crop: eigen
