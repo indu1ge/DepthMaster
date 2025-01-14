@@ -150,16 +150,6 @@ class BaseDepthDataset(Dataset):
                 rasters["depth_filled_linear"]
             ).clone()
 
-            # # depth2disp
-            # rasters["depth_raw_linear"] = depth2disparity(rasters["depth_raw_linear"]).clone()
-            # if self.has_filled_depth:
-            #     rasters["depth_filled_linear"] = depth2disparity(rasters["depth_filled_linear"]).clone()
-
-            # # sqrt(x)
-            # rasters["depth_raw_linear"] = torch.sqrt(rasters["depth_raw_linear"]).clone()
-            # if self.has_filled_depth:
-            #     rasters["depth_filled_linear"] = torch.sqrt(rasters["depth_filled_linear"]).clone()
-
         other = {"index": index, "rgb_relative_path": rgb_rel_path}
 
         return rasters, other
