@@ -34,6 +34,7 @@ from PIL import Image
 from tqdm.auto import tqdm
 
 from depthmaster import DepthMasterPipeline
+from depthmaster.modules.unet_2d_condition import UNet2DConditionModel
 
 EXTENSION_LIST = [".jpg", ".png"]
 
@@ -186,6 +187,8 @@ if "__main__" == __name__:
     pipe: DepthMasterPipeline = DepthMasterPipeline.from_pretrained(
         checkpoint_path, variant=variant, torch_dtype=dtype
     )
+    unet = UNet2DConditionModel.from_pretrained(os.path.join(checkpoint_path, f'unet'))
+    pipe.unet = unet
 
     try:
         pipe.enable_xformers_memory_efficient_attention()
