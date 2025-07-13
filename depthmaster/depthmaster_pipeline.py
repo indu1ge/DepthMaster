@@ -33,7 +33,7 @@ from diffusers import (
     DiffusionPipeline,
     # UNet2DConditionModel,
 )
-from depthmaster.modules.unet_2d_condition import UNet2DConditionModel
+from depthmaster.modules.unet_2d_condition_s2 import UNet2DConditionModel
 from diffusers.utils import BaseOutput
 from PIL import Image
 from torch.utils.data import DataLoader, TensorDataset
@@ -121,8 +121,6 @@ class DepthMasterPipeline(DiffusionPipeline):
         default_processing_resolution: Optional[int] = None,
     ):
         super().__init__()
-
-        # unet = UNet2DConditionModel.from_pretrained('/zssd/szy/Marigold_rgb2d/ckpt/eval/unet')
 
         self.register_modules(
             unet=unet,

@@ -34,7 +34,7 @@ from PIL import Image
 from tqdm.auto import tqdm
 
 from depthmaster import DepthMasterPipeline
-from depthmaster.modules.unet_2d_condition import UNet2DConditionModel
+from depthmaster.modules.unet_2d_condition_s2 import UNet2DConditionModel
 
 EXTENSION_LIST = [".jpg", ".png"]
 

@@ -108,7 +108,7 @@ python run.py \
 
 ## 🦿 Evaluation on test datasets <a name="evaluation"></a>
 
-Set data directory variable (also needed in evaluation scripts) and download [evaluation datasets](https://share.phys.ethz.ch/~pf/bingkedata/marigold/evaluation_dataset) follow [Marigold](https://github.com/prs-eth/Marigold) into corresponding subfolders:
+Set data directory variable (also needed in evaluation scripts) and download [evaluation datasets](https://share.phys.ethz.ch/~pf/bingkedata/marigold/evaluation_dataset) following [Marigold](https://github.com/prs-eth/Marigold) into corresponding subfolders:
 
 ```bash
 export BASE_DATA_DIR=<YOUR_DATA_DIR>  # Set target data directory
@@ -123,28 +123,48 @@ bash scripts/eval_kitti.sh
 ```
 The evaluation results will be saved to `output\kitti`.
 
-<!-- ## 🏋️ Training
+## 🏋️ Training
 
 
-Set environment parameters for the data directory:
+Modify the data directory in `train_s1.sh` and `train_s2.sh`:
 
 ```bash
-export BASE_DATA_DIR=YOUR_DATA_DIR  # directory of training data
-export BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
+BASE_DATA_DIR=YOUR_DATA_DIR  # directory of training data
+```
+
+Prepare for [Hypersim](https://github.com/apple/ml-hypersim) and [Virtual KITTI 2](https://europe.naverlabs.com/research/computer-vision/proxy-virtual-worlds-vkitti-2/) datasets and save into `${BASE_DATA_DIR}` following [Marigold](https://github.com/prs-eth/Marigold?tab=readme-ov-file).
+
+
+### The fist-stage training
+Modify the checkpoint directory in `train_s1.sh`:
+
+```bash
+BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
 ```
 
 Download Stable Diffusion v2 [checkpoint](https://huggingface.co/stabilityai/stable-diffusion-2) into `${BASE_CKPT_DIR}`
 
-Prepare for [Hypersim](https://github.com/apple/ml-hypersim) and [Virtual KITTI 2](https://europe.naverlabs.com/research/computer-vision/proxy-virtual-worlds-vkitti-2/) datasets and save into `${BASE_DATA_DIR}`. Please refer to [this README](script/dataset_preprocess/hypersim/README.md) for Hypersim preprocessing.
+Run training script
+
+```bash
+bash scripts/train_s1.sh
+```
+
+### The fist-stage training
+Modify the checkpoint directory in `train_s1.sh`:
+
+```bash
+BASE_CKPT_DIR=YOUR_FIRST_STAGE_CHECKPOINT_DIR  # directory of your fist-stage checkpoint checkpoint
+```
 
 Run training script
 
 ```bash
-bash scripts/train.sh
+bash scripts/train_s2.sh
 ```
 
 
-Evaluating results
+<!-- Evaluating results
 
 Only the U-Net is updated and saved during training. To use the inference pipeline with your training result, replace `unet` folder in Marigold checkpoints with that in the `checkpoint` output folder. Then refer to [this section](#evaluation) for evaluation. -->
 

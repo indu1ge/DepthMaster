@@ -4,8 +4,12 @@ base_config:
 - config/dataset/dataset_train.yaml
 - config/dataset/dataset_val.yaml
 - config/dataset/dataset_vis.yaml
-- config/model_sdv2.yaml
 
+
+model:
+  name: DepthMaster_pipeline
+  pretrained_path: stage1
+  latent_scale_factor: 0.18215
 
 pipeline:
   name: DepthMasterPipeline
@@ -26,14 +30,14 @@ augmentation:
 dataloader:
   num_workers: 2
   effective_batch_size: 32
-  max_train_batch_size: 16
+  max_train_batch_size: 1
   seed: 2024  # to ensure continuity when resuming from checkpoint
 
 # Training settings
 trainer:
-  name: DepthMasterTrainer
+  name: DepthMasterTrainerS2
   training_noise_scheduler:
-    pretrained_path: initialization_v2
+    pretrained_path: stage1
   init_seed: 2024  # use null to train w/o seeding
   save_period: 2000
   backup_period: 2000
@@ -59,17 +63,8 @@ loss:
   kwargs:
     reduction: mean
 
-diff_loss:
-  name: mse_loss
-  kwargs:
-    reduction: mean
-  lamda: 0.01
 
-loss_feat_align:
-  lamda: 1
-  tolerance_margin: 0.85
-
-lr: 3.0e-05
+lr: 3.0e-06
 lr_scheduler:
   name: IterExponential
   kwargs:
@@ -109,27 +104,3 @@ grad_loss:
   lamda: 1e-3
   num: 3
   thre: 0.04
-
-edge_loss:
-  name: mse_loss
-  kwargs:
-    reduction: mean
-  lamda: 1e-3
-
-smooth_loss:
-  lamda: 1e-3
-
-ssim_loss:
-  lamda: 1e-3
-
-pixel_loss:
-  name: l1_loss
-  kwargs:
-    reduction: mean
-  lamda: 10
-
-fourier_loss:
-  name: mse_loss
-  kwargs:
-    reduction: mean
-  lamda: 1e-8

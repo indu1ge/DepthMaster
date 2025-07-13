@@ -35,7 +35,7 @@ from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
 from depthmaster import DepthMasterPipeline
-from depthmaster.modules.unet_2d_condition import UNet2DConditionModel
+from depthmaster.modules.unet_2d_condition_s2 import UNet2DConditionModel
 from src.util.seeding import seed_all
 from src.dataset import (
     BaseDepthDataset,
