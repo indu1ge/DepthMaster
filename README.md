@@ -142,7 +142,9 @@ Modify the checkpoint directory in `train_s1.sh`:
 BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
 ```
 
-Download Stable Diffusion v2 [checkpoint](https://huggingface.co/stabilityai/stable-diffusion-2) into `${BASE_CKPT_DIR}`
+Download Stable Diffusion v2 [checkpoint](https://huggingface.co/stabilityai/stable-diffusion-2) into `${BASE_CKPT_DIR}`.
+\
+Download the checkpoint of [Depth-Anything-V2](https://github.com/DepthAnything/Depth-Anything-V2) into `checkpoints/`
 
 Run training script
 
@@ -185,6 +187,8 @@ Please cite our paper:
 ## Acknowledgements
 
 The code is based on [Marigold](https://github.com/prs-eth/Marigold).
+\
+The external encoder checkpoint is from [Depth-Anything-V2](https://github.com/DepthAnything/Depth-Anything-V2).
 
 ## 🎫 License
 

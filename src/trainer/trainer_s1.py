@@ -96,7 +96,7 @@ class DepthMasterTrainerS1:
         # Initialize DINOv2 encoder
         self.dinov2_encoder = DINOv2(model_name='vitg')
         dinov2_encoder_dict = self.dinov2_encoder.state_dict()
-        pretrained_ckpt_dict = torch.load(f'/ssd/szy/Depth-Anything-V2/checkpoints/depth_anything_v2_vitg.pth', map_location='cpu')
+        pretrained_ckpt_dict = torch.load(f'checkpoints/depth_anything_v2_vitg.pth', map_location='cpu')
         pretrained_dict = {k.replace('pretrained.', ''): v for k, v in pretrained_ckpt_dict.items() if k.replace('pretrained.', '') in dinov2_encoder_dict}
         self.dinov2_encoder.load_state_dict(pretrained_dict)
         del self.dinov2_encoder.head
