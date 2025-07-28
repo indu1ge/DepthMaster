@@ -152,8 +152,8 @@ Run training script
 bash scripts/train_s1.sh
 ```
 
-### The fist-stage training
-Modify the checkpoint directory in `train_s1.sh`:
+### The second-stage training
+Modify the checkpoint directory in `train_s2.sh`:
 
 ```bash
 BASE_CKPT_DIR=YOUR_FIRST_STAGE_CHECKPOINT_DIR  # directory of your fist-stage checkpoint checkpoint
