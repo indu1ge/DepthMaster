@@ -153,7 +153,7 @@ class DepthMasterTrainerS2:
         diff_y = x[..., 1:, 1:] - x[..., :-1, 1:]
 
         diff_45 = x[..., :-1, 1:] - x[..., 1:, :-1]
-        diff_135 = x[..., 1:, 1:] = x[..., :-1, :-1]
+        diff_135 = x[..., 1:, 1:] - x[..., :-1, :-1]
 
         # mag = diff_x**2 + diff_y**2
         # # angle_ratio
