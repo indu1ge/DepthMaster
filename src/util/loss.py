@@ -126,7 +126,7 @@ class HuberLoss:
         squared_diff = diff ** 2
         
         # 使用条件语句选择L2损失或L1损失
-        loss = torch.where(abs_diff > self.delta, 0.5 * squared_diff, self.delta * abs_diff - 0.5 * self.delta ** 2)
+        loss = torch.where(abs_diff > self.delta, 0.5 * squared_diff, self.delta * abs_diff + 0.5 * self.delta ** 2)
         
         # 返回所有样本损失的总和
         if valid_mask is not None:

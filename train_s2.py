@@ -322,8 +322,8 @@ if "__main__" == __name__:
     model = DepthMasterPipeline.from_pretrained(
         os.path.join(base_ckpt_dir, cfg.model.pretrained_path), **_pipeline_kwargs
     )
-    unet = UNet2DConditionModel.from_pretrained(os.path.join(base_ckpt_dir, cfg.model.pretrained_path, f'unet'), low_cpu_mem_usage=False, device_map=None)
-    model.unet = unet
+    # unet = UNet2DConditionModel.from_pretrained(os.path.join(base_ckpt_dir, cfg.model.pretrained_path, f'unet'), low_cpu_mem_usage=False, device_map=None)
+    # model.unet = unet
 
     # -------------------- Trainer --------------------
     # Exit time

@@ -459,7 +459,8 @@ class DepthMasterTrainerS2:
                     max_resolution=self.cfg.eval.align_max_res,
                 )
             elif  "least_square_disparity" == self.cfg.eval.alignment:
-                gt_disparity = depth_raw
+                # gt_disparity = depth_raw
+                gt_disparity = depth2disparity(depth_raw)
                 gt_non_neg_mask = gt_disparity > 0
 
                 # LS alignment in disparity space
@@ -479,7 +480,8 @@ class DepthMasterTrainerS2:
                 depth_pred = disparity2depth(disparity_pred)
                 depth_raw_ts = disparity2depth(depth_raw_ts)
             elif "least_square_sqrt_disp" == self.cfg.eval.alignment:
-                gt_sqrt_disp = depth_raw
+                # gt_sqrt_disp = depth_raw
+                gt_sqrt_disp = np.sqrt(depth2disparity(depth_raw))
                 gt_non_neg_mask = gt_sqrt_disp > 0
 
                 # LS alignment in sqrt space
