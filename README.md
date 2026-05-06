@@ -23,7 +23,7 @@ This repository represents the official implementation of the paper titled "Dept
         <br>
         University of Science and Technology of China, vivo Mobile Communication Co., Ltd.
         <br>
-        <b>Arxiv 2025</b>
+        <b>TCSVT 2026</b>
 </p>
 <!-- [Ziyang Song*](https://indu1ge.github.io/ziyangsong),
 [Zerong Wang*](),
@@ -53,6 +53,7 @@ This repository represents the official implementation of the paper titled "Dept
 >We present DepthMaster, a tamed single-step diffusion model that customizes generative features in diffusion models to suit the discriminative depth estimation task. We introduce a Feature Alignment module to mitigate overfitting to texture and a Fourier Enhancement module to refine fine-grained details. DepthMaster exhibits state-of-the-art zero-shot performance and superior detail preservation ability, surpassing
 other diffusion-based methods across various datasets.
 ## 📢 News
+2026-04-02: [Paper](https://ieeexplore.ieee.org/document/11475488) is accepted by TCSVT.
 2025-01-15: Evaluation code is released. <br>
 2025-01-02: [Paper](https://arxiv.org/abs/2501.02576) is released on arXiv. <br>
 <!-- 2023-12-04: Added <a href="https://arxiv.org/abs/2312.02145"><img src="https://img.shields.io/badge/arXiv-PDF-b31b1b" height="16"></a>
@@ -176,11 +177,12 @@ Only the U-Net is updated and saved during training. To use the inference pipeli
 Please cite our paper:
 
 ```bibtex
-@article{song2025depthmaster,
-  title={DepthMaster: Taming Diffusion Models for Monocular Depth Estimation},
+@article{song2026depthmaster,
+  title={Depthmaster: Taming diffusion models for monocular depth estimation},
   author={Song, Ziyang and Wang, Zerong and Li, Bo and Zhang, Hao and Zhu, Ruijie and Liu, Li and Jiang, Peng-Tao and Zhang, Tianzhu},
-  journal={arXiv preprint arXiv:2501.02576},
-  year={2025}
+  journal={IEEE Transactions on Circuits and Systems for Video Technology},
+  year={2026},
+  publisher={IEEE}
 }
 ```
 
