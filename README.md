@@ -53,7 +53,7 @@ This repository represents the official implementation of the paper titled "Dept
 >We present DepthMaster, a tamed single-step diffusion model that customizes generative features in diffusion models to suit the discriminative depth estimation task. We introduce a Feature Alignment module to mitigate overfitting to texture and a Fourier Enhancement module to refine fine-grained details. DepthMaster exhibits state-of-the-art zero-shot performance and superior detail preservation ability, surpassing
 other diffusion-based methods across various datasets.
 ## 📢 News
-2026-04-02: [Paper](https://ieeexplore.ieee.org/document/11475488) is accepted by TCSVT.
+2026-04-02: [Paper](https://ieeexplore.ieee.org/document/11475488) is accepted by TCSVT. <br>
 2025-01-15: Evaluation code is released. <br>
 2025-01-02: [Paper](https://arxiv.org/abs/2501.02576) is released on arXiv. <br>
 <!-- 2023-12-04: Added <a href="https://arxiv.org/abs/2312.02145"><img src="https://img.shields.io/badge/arXiv-PDF-b31b1b" height="16"></a>
